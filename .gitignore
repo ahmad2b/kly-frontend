@@ -4,4 +4,3 @@ alembic
 .env
 .mypy_cache
 __pycache__
-```

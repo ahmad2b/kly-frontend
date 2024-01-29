@@ -1,0 +1,7 @@
+app.log
+alembic.ini
+alembic
+.env
+.mypy_cache
+__pycache__
+```

@@ -1,42 +1,64 @@
-from fastapi import FastAPI, Depends, status, HTTPException, Request
+from fastapi import FastAPI, status, HTTPException, Depends
 from starlette.responses import JSONResponse, RedirectResponse
 
-from typing import Annotated
+from api._public import api as public_api
+from api._utils.errors import NotFound
+from api._public.url import url_service
+from api.config import settings
+from api._utils.logger import logger_config
 
-from .models import URL
-from .service import get_url, create_url
-from .errors import NotFound, Duplicate
+from api.database import get_session
+from api._auth import get_current_user
+from sqlmodel import Session
 
+logger = logger_config(__name__)
 
 app = FastAPI(
-    # docs_url="/api/docs/",
-    # openapi_url="/api/openapi.json/",
-    title="Kly.lol API Docs",
-    description="Kly.lol is a URL shortener service powered by Gemini with FastAPI and Next.js.",
-    version="0.1.0",
+    docs_url="/api/docs",
+    openapi_url="/api/openapi.json",
+    title=settings.PROJECT_NAME,
+    description=settings.DESCRIPTION,
+    version=settings.VERSION,
     contact={
         "name": "Kly.lol",
         "url": "https://www.kly.lol",
         "email": "ahmadshaukat_4@outlook.com",
     },
     servers=[
+        # {
+        #     "url": "https://www.kly.lol",
+        #     "description": "Production server",
+        # },
         {
-            "url": "https://www.kly.lol",
-            "description": "Production server",
+            "url": "https://welcomed-teal-perfectly.ngrok-free.app",
+            "description": "Development server",
         },
         {"url": "http://localhost:8000", "description": "Local Development server"},
     ],
     debug=True,
 )
 
+app.include_router(public_api)
 
+
+# API status
 @app.get(
-    "/api",
+    "/api/status",
+    tags=["Status"],
+    summary="Status of API",
+    description="Status of API",
+    responses={
+        200: {
+            "description": "Status of API",
+            "content": {"application/json": {"example": {"status": "UP"}}},
+        }
+    },
 )
-async def root():
-    return {"message": "Hello World"}
+def api_status():
+    return JSONResponse({"status": "UP"})
 
 
+# Redirect API
 @app.get(
     "/api/{short_url}",
     response_class=RedirectResponse,
@@ -57,75 +79,14 @@ async def root():
     },
     deprecated=False,
 )
-async def redirect(short_url: str):
+async def redirect(short_url: str, db: Session = Depends(get_session)):
     try:
-        url = get_url(short_url)
+        url = url_service.get_url(short_url, db=db)
         if not url:
             raise NotFound(f"URL with short URL {short_url} not found")
-        return RedirectResponse(url.original_url)
+        return RedirectResponse(url.url)
     except NotFound as e:
         raise HTTPException(status_code=404, detail=str(e))
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
-@app.post(
-    "/api/url",
-    tags=["URL"],
-    response_model=URL,
-    status_code=status.HTTP_201_CREATED,
-    summary="Create a new short URL",
-    description="Create a new URL. If description is not provided, the url content will be used to generate relvent alias.",
-    responses={
-        400: {
-            "content": {
-                "application/json": {
-                    "example": {
-                        "detail": "URL is missing",
-                    }
-                }
-            }
-        },
-        409: {
-            "content": {
-                "application/json": {
-                    "example": {
-                        "detail": "URL already exists",
-                    }
-                }
-            }
-        },
-        422: {
-            "content": {
-                "application/json": {
-                    "example": {
-                        "detail": "Invalid URL",
-                    }
-                }
-            }
-        },
-    },
-    deprecated=False,
-)
-async def create(url: URL) -> URL:
-    try:
-        return create_url(url)
-    except Duplicate as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-
-@app.get(
-    "/api/url/{short_url}",
-    tags=["URL"],
-)
-async def get_original_url(short_url):
-    try:
-        url = get_url(short_url)
-        return url.url
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 

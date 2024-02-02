@@ -1,7 +1,10 @@
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime, timedelta
-
 from sqlmodel import Field, SQLModel, Relationship
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from api._public.user.models import User
 
 
 class URL(SQLModel, table=True):
@@ -18,19 +21,3 @@ class URL(SQLModel, table=True):
 
     user_id: Optional[int] = Field(default=None, foreign_key="user.id")
     user: Optional["User"] = Relationship(back_populates="urls")
-
-
-class User(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    username: str = Field(nullable=False, index=True, unique=True)
-    hash_password: str = Field(nullable=False)
-    created_at: Optional[datetime] = Field(default_factory=datetime.utcnow)
-    updated_at: Optional[datetime] = Field(default_factory=None)
-    deleted_at: Optional[datetime] = Field(default_factory=None)
-
-    urls: List[URL] = Relationship(back_populates="user")
-
-
-class UserCreate(SQLModel):
-    username: str
-    password: str

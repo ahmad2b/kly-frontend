@@ -324,3 +324,53 @@ data: "EvePlops"
 2024-01-29 18:07:12 - INFO - {'method': 'GET', 'path': '/openapi.json', 'status_code': 200, 'process_time': '0.0116 ms'}
 2024-01-29 18:08:58 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '7.7307 ms'}
 2024-01-29 18:09:34 - INFO - {'method': 'GET', 'path': '/FounderTruthBombs-LVB', 'status_code': 307, 'process_time': '0.3015 ms'}
+2024-01-29 18:43:03 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '7.0992 ms'}
+2024-01-29 18:45:21 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '2.4344 ms'}
+2024-01-29 19:59:50 - WARNING - Compute Engine Metadata server unavailable on attempt 1 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 19:59:50 - WARNING - Compute Engine Metadata server unavailable on attempt 2 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 19:59:50 - WARNING - Compute Engine Metadata server unavailable on attempt 3 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 19:59:50 - WARNING - Authentication failed using Compute Engine authentication due to unavailable metadata server.
+2024-01-29 19:59:50 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 400, 'process_time': '0.0597 ms'}
+2024-01-29 20:06:29 - INFO - {'method': 'GET', 'path': '/', 'status_code': 404, 'process_time': '0.0000 ms'}
+2024-01-29 20:07:11 - WARNING - Compute Engine Metadata server unavailable on attempt 1 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 20:07:12 - WARNING - Compute Engine Metadata server unavailable on attempt 2 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 20:07:12 - WARNING - Compute Engine Metadata server unavailable on attempt 3 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 20:07:12 - WARNING - Authentication failed using Compute Engine authentication due to unavailable metadata server.
+2024-01-29 20:07:12 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 400, 'process_time': '0.0316 ms'}
+2024-01-29 20:08:05 - WARNING - Compute Engine Metadata server unavailable on attempt 1 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 20:08:05 - WARNING - Compute Engine Metadata server unavailable on attempt 2 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 20:08:05 - WARNING - Compute Engine Metadata server unavailable on attempt 3 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 20:08:05 - WARNING - Authentication failed using Compute Engine authentication due to unavailable metadata server.
+2024-01-29 20:08:05 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 400, 'process_time': '0.0537 ms'}
+2024-01-29 20:10:06 - INFO - {'method': 'GET', 'path': '/', 'status_code': 404, 'process_time': '0.0030 ms'}
+2024-01-29 20:10:29 - INFO - {'method': 'GET', 'path': '/api/url/FastAPIHero-SnD', 'status_code': 200, 'process_time': '3.9087 ms'}
+2024-01-29 20:10:35 - WARNING - Compute Engine Metadata server unavailable on attempt 1 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 20:10:35 - WARNING - Compute Engine Metadata server unavailable on attempt 2 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 20:10:35 - WARNING - Compute Engine Metadata server unavailable on attempt 3 of 3. Reason: [WinError 10051] A socket operation was attempted to an unreachable network
+2024-01-29 20:10:35 - WARNING - Authentication failed using Compute Engine authentication due to unavailable metadata server.
+2024-01-29 20:10:35 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 400, 'process_time': '0.0560 ms'}
+2024-01-29 20:10:59 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '6.3426 ms'}
+2024-01-29 20:11:48 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '2.5063 ms'}
+2024-01-29 20:14:51 - INFO - {'method': 'GET', 'path': '/', 'status_code': 404, 'process_time': '0.0000 ms'}
+2024-01-29 21:07:46 - INFO - {'method': 'POST', 'path': '/url', 'status_code': 405, 'process_time': '0.0013 ms'}
+2024-01-29 21:07:46 - INFO - HTTP Request: POST http://testserver/url "HTTP/1.1 405 Method Not Allowed"
+2024-01-29 21:10:04 - INFO - {'method': 'POST', 'path': '/url', 'status_code': 405, 'process_time': '0.0010 ms'}
+2024-01-29 21:10:04 - INFO - HTTP Request: POST http://testserver/url "HTTP/1.1 405 Method Not Allowed"
+2024-01-29 21:10:31 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '8.5006 ms'}
+2024-01-29 21:10:31 - INFO - HTTP Request: POST http://testserver/api/url "HTTP/1.1 201 Created"
+2024-01-29 21:12:05 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '7.9112 ms'}
+2024-01-29 21:12:05 - INFO - HTTP Request: POST http://testserver/api/url "HTTP/1.1 201 Created"
+2024-01-29 21:12:36 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '5.5663 ms'}
+2024-01-29 21:12:36 - INFO - HTTP Request: POST http://testserver/api/url "HTTP/1.1 201 Created"
+2024-01-29 21:14:24 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '6.0752 ms'}
+2024-01-29 21:14:24 - INFO - HTTP Request: POST http://testserver/api/url "HTTP/1.1 201 Created"
+2024-01-29 21:21:02 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '7.7923 ms'}
+2024-01-29 21:21:02 - INFO - HTTP Request: POST http://testserver/api/url "HTTP/1.1 201 Created"
+2024-01-29 21:22:16 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '5.6251 ms'}
+2024-01-29 21:22:16 - INFO - HTTP Request: POST http://testserver/api/url "HTTP/1.1 201 Created"
+2024-01-29 23:39:51 - INFO - {'method': 'POST', 'path': '/api/url', 'status_code': 201, 'process_time': '6.2733 ms'}
+2024-01-29 23:40:03 - INFO - {'method': 'GET', 'path': '/AnimalGenetics-L8P', 'status_code': 307, 'process_time': '0.3294 ms'}
+2024-01-29 23:40:23 - INFO - {'method': 'GET', 'path': '/api/url/AnimalGenetics-L8P', 'status_code': 200, 'process_time': '0.3384 ms'}
+2024-01-30 15:48:22 - INFO - {'method': 'GET', 'path': '/', 'status_code': 404, 'process_time': '0.0055 ms'}
+2024-01-30 15:48:32 - INFO - {'method': 'GET', 'path': '/api', 'status_code': 400, 'process_time': '0.0232 ms'}
+2024-01-30 15:48:45 - INFO - {'method': 'GET', 'path': '/api', 'status_code': 404, 'process_time': '4.0503 ms'}

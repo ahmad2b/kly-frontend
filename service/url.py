@@ -4,7 +4,6 @@ from data import url as data
 from schema.url import URLCreate, URLInDB, URL
 from logger import logger
 from sqlalchemy.orm import Session
-import json
 
 from service import gemini as service
 
@@ -26,17 +25,17 @@ def create(db: Session, url: URLCreate):
     return data.create_url(db=db, url=url, short_url=smart_url)
 
 
-def generate_short_url():
-    """
-    Generate a random string of letters and digits of length 8.
-    Returns:
-        str: A random string of letters and digits of length 8.
-    """
-    return "".join(
-        random.choices(
-            string.ascii_uppercase + string.ascii_lowercase + string.digits, k=8
-        )
-    )
+# def generate_short_url():
+#     """
+#     Generate a random string of letters and digits of length 8.
+#     Returns:
+#         str: A random string of letters and digits of length 8.
+#     """
+#     return "".join(
+#         random.choices(
+#             string.ascii_uppercase + string.ascii_lowercase + string.digits, k=8
+#         )
+#     )
 
 
 def get_url(db: Session, short_url: str):

@@ -1,6 +1,8 @@
 import google.generativeai as genai  # type: ignore
 import json
 
+genai.configure(api_key="AIzaSyBz9bRK94o5_ABiw79ePY-3P0m0asqxma0")
+
 
 generation_config = {
     "temperature": 0.9,

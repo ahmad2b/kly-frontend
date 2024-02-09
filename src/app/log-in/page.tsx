@@ -3,19 +3,28 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+
 const Signin = () => {
-  return (
-    <section className="bg-gray-1 py-20 dark:bg-dark lg:py-[120px]">
-      <div className="container mx-auto">
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4">
-            <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
-              <div className="mb-10 text-center md:mb-10">
-                <a href="/#" className="mx-auto inline-block max-w-[160px]">
-                  <Image src="/logo.svg" alt="logo" width={60} height={60} />
-                </a>
-              </div>
-              <h1 className="mb-8 text-3xl items-center font-bold">Login</h1>
+	return (
+		<section className='bg-gray-1 py-20 dark:bg-dark lg:py-[120px]'>
+			<div className='container mx-auto'>
+				<div className='-mx-4 flex flex-wrap'>
+					<div className='w-full px-4'>
+						<div className='relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]'>
+							<div className='mb-10 text-center md:mb-10'>
+								<a
+									href='/#'
+									className='mx-auto inline-block max-w-[160px]'
+								>
+									<Image
+										src='/logo.svg'
+										alt='logo'
+										width={60}
+										height={60}
+									/>
+								</a>
+							</div>
+							<h1 className='mb-8 text-3xl items-center font-bold'>Login</h1>
 
               <form>
                 <InputBox type="email" name="email" placeholder="Email" />
@@ -115,19 +124,20 @@ const Signin = () => {
       </div>
     </section>
   );
+
 };
 
 export default Signin;
 
 const InputBox = ({ type, placeholder, name }: any) => {
-  return (
-    <div className="mb-6">
-      <input
-        type={type}
-        placeholder={placeholder}
-        name={name}
-        className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-black"
-      />
-    </div>
-  );
+	return (
+		<div className='mb-6'>
+			<input
+				type={type}
+				placeholder={placeholder}
+				name={name}
+				className='w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-black'
+			/>
+		</div>
+	);
 };

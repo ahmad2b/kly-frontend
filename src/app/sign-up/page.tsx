@@ -3,8 +3,9 @@ import { FaFacebookF, FaGoogle, FaXTwitter } from 'react-icons/fa6';
 
 import { cn } from '@/lib/utils';
 
-import { Logo } from '@/components/Logo';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Logo } from '@/components/logo';
+import { buttonVariants } from '@/components/ui/button';
+import { SignupForm } from './signup-form';
 
 const socialIcons = [
 	{
@@ -26,7 +27,7 @@ const socialIcons = [
 
 function Signup() {
 	return (
-		<section className='bg-gray-1 py-10 dark:bg-dark lg:py-[120px]'>
+		<section className='bg-gray-1 dark:bg-dark'>
 			<div className='container mx-auto'>
 				<div className='-mx-4 flex flex-wrap'>
 					<div className='w-full px-4'>
@@ -37,55 +38,39 @@ function Signup() {
 									width={60}
 								/>
 							</div>
-							<h1 className='mb-8 text-3xl items-center font-bold'>Sign up</h1>
-							<form>
-								<InputBox
-									type='email'
-									name='email'
-									placeholder='Email'
-								/>
-								<InputBox
-									type='password'
-									name='password'
-									placeholder='Password'
-								/>
-								<InputBox
-									type='confirm-password'
-									name='confirm-password'
-									placeholder='Confirm Password'
-								/>
-								<div className='mb-10'>
-									<Button
-										variant='secondary'
-										className='w-full cursor-pointer px-5 py-3 text-base font-medium transition bg-gray-800 text-white hover:bg-gray-700'
-									>
-										Continue
-									</Button>
-								</div>
-							</form>
-							<p className='mb-6 text-sm text-secondary-color dark:text-dark-7'>
-								Or Connect With
-							</p>
-							<ul className='-mx-2 mb-12 flex justify-between'>
-								{socialIcons.map((icon, index) => (
-									<li
-										key={index}
-										className='w-full px-2'
-									>
-										<Link
-											href={icon.href}
-											className={cn(
-												buttonVariants({
-													variant: 'secondary',
-													className: 'w-full hover:bg-black/20',
-												})
-											)}
+
+							<h1 className='mb-8 text-3xl items-center font-extrabold'>
+								Sign Up
+							</h1>
+
+							<SignupForm />
+
+							<div className='flex flex-col space-y-4 py-4'>
+								<p className='text-sm text-secondary-color dark:text-dark-7'>
+									Or Connect With
+								</p>
+								<ul className='-mx-2 mb-12 flex justify-between'>
+									{socialIcons.map((icon, index) => (
+										<li
+											key={index}
+											className='w-full px-2'
 										>
-											<icon.icon size={20} />
-										</Link>
-									</li>
-								))}
-							</ul>
+											<Link
+												href={icon.href}
+												className={cn(
+													buttonVariants({
+														variant: 'secondary',
+														className: 'w-full hover:bg-black/20',
+													})
+												)}
+											>
+												<icon.icon size={20} />
+											</Link>
+										</li>
+									))}
+								</ul>
+							</div>
+
 							<div className='flex items-center justify-center'>
 								<span className='text-sm font-medium'>
 									Already have an account?{' '}
@@ -110,16 +95,3 @@ function Signup() {
 }
 
 export default Signup;
-
-const InputBox = ({ type, placeholder, name }: any) => {
-	return (
-		<div className='mb-6'>
-			<input
-				type={type}
-				placeholder={placeholder}
-				name={name}
-				className='w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-black'
-			/>
-		</div>
-	);
-};

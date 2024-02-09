@@ -1,9 +1,5 @@
-import ShortUrl from '@/components/Hero';
+import { HeroSection } from '@/components/hero';
 
 export default function Home() {
-	return (
-		<div>
-			<ShortUrl />
-		</div>
-	);
+	return <HeroSection />;
 }

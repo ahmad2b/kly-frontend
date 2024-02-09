@@ -8,27 +8,26 @@ import { Button } from '@/components/ui/button';
 import {
 	Form,
 	FormControl,
+	FormDescription,
 	FormField,
 	FormItem,
-	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/components/ui/use-toast';
 
 const FormSchema = z.object({
-	Url: z.string().min(10, {
-		message: 'Enter the URL',
-	}),
+	url: z.string().url(),
 });
 
-function ShortUrl() {
+export function HeroSection() {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			Url: '',
+			url: '',
 		},
 	});
+
 	function onSubmit(data: z.infer<typeof FormSchema>) {
 		toast({
 			title: 'You submitted the following values:',
@@ -41,30 +40,37 @@ function ShortUrl() {
 	}
 
 	return (
-		<div className='flex items-center justify-center p-6 min-h-2.5'>
-			<div className='mx-auto w-full max-w-md'>
+		<div className='flex flex-col items-center justify-center p-6 min-h-2.5'>
+			<h2 className='scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0'>
+				An AI URL shortener for the modern web.{' '}
+				<span
+					role='img'
+					aria-label='rocket'
+				>
+					🚀
+				</span>
+			</h2>
+			<div className='mx-auto w-full max-w-md py-4 md:py-10'>
 				<Form {...form}>
 					<form
 						onSubmit={form.handleSubmit(onSubmit)}
-						className='flex flex-col items-center space-y-6'
+						className='space-y-4'
 					>
 						<FormField
 							control={form.control}
-							name='Url'
+							name='url'
 							render={({ field }) => (
-								<FormItem className=' space-y-6'>
-									<FormLabel className=' text-2xl font-bold'>
-										Paste the URL to make it short
-									</FormLabel>
+								<FormItem>
 									<FormControl>
 										<Input
-											placeholder='Enter URL'
 											{...field}
+											placeholder='https://example.com'
+											className='w-full'
 										/>
 									</FormControl>
-									{/* <FormDescription>
-                    This is your public display name.
-                  </FormDescription> */}
+									<FormDescription>
+										Enter a valid URL to shorten it.
+									</FormDescription>
 									<FormMessage />
 								</FormItem>
 							)}
@@ -76,5 +82,3 @@ function ShortUrl() {
 		</div>
 	);
 }
-
-export default ShortUrl;

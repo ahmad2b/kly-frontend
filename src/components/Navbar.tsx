@@ -1,19 +1,13 @@
-import Image from 'next/image';
+import { Logo } from '@/components/Logo';
+import { Button } from '@/components/ui/button';
+
 import Link from 'next/link';
-import { Button } from './ui/button';
 
 function Navbar() {
 	return (
 		<div className='hidden md:block'>
 			<div className='p-6 flex justify-between'>
-				<div>
-					<Image
-						src={'/logo.svg'}
-						alt='Logo'
-						width={40}
-						height={40}
-					/>
-				</div>
+				<Logo />
 				<div className='flex gap-4'>
 					<Link href='/log-in'>
 						<Button

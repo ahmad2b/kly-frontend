@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Signin = () => {
@@ -32,10 +33,16 @@ const Signin = () => {
                   </Button>
                 </div>
               </form>
+              <a
+                href="/#"
+                className="mb-4 inline-block text-base text-dark hover:text-primary hover:underline dark:text-white"
+              >
+                Forget Password?
+              </a>
               <p className="mb-6 text-base text-secondary-color dark:text-dark-7">
-                Connect With
+                Or Connect With
               </p>
-              <ul className="-mx-2 mb-12 flex justify-between">
+              <ul className="-mx-2 mb-6 flex justify-between">
                 <li className="w-full px-2">
                   <a
                     href="/#"
@@ -94,18 +101,14 @@ const Signin = () => {
                   </a>
                 </li>
               </ul>
-              <a
-                href="/#"
-                className="mb-2 inline-block text-base text-dark hover:text-primary hover:underline dark:text-white"
-              >
-                Forget Password?
-              </a>
-              <p className="text-base text-body-color dark:text-dark-6">
-                <span className="pr-0.5">Not a member yet?</span>
-                <a href="/#" className="text-primary hover:underline">
-                  Sign Up
-                </a>
-              </p>
+              <div>
+                <span className="text-sm font-medium">Not a member yet?</span>
+                <Button variant={"link"}>
+                  <Link href={"/log-in"}>
+                    <p>Sign up</p>
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

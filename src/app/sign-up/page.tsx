@@ -1,79 +1,11 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function page() {
   return (
-    // <div className="bg-grey-lighter min-h-screen flex flex-col">
-    //   <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-    //     <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-    //       <h1 className="mb-8 text-3xl text-center">Sign up</h1>
-    //       <input
-    //         type="text"
-    //         className="block border border-grey-light w-full p-3 rounded mb-4"
-    //         name="fullname"
-    //         placeholder="Full Name"
-    //       />
-
-    //       <input
-    //         type="text"
-    //         className="block border border-grey-light w-full p-3 rounded mb-4"
-    //         name="email"
-    //         placeholder="Email"
-    //       />
-
-    //       <input
-    //         type="password"
-    //         className="block border border-grey-light w-full p-3 rounded mb-4"
-    //         name="password"
-    //         placeholder="Password"
-    //       />
-    //       <input
-    //         type="password"
-    //         className="block border border-grey-light w-full p-3 rounded mb-4"
-    //         name="confirm_password"
-    //         placeholder="Confirm Password"
-    //       />
-
-    //       <button
-    //         type="submit"
-    //         className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
-    //       >
-    //         Create Account
-    //       </button>
-
-    //       <div className="text-center text-sm text-grey-dark mt-4">
-    //         By signing up, you agree to the
-    //         <a
-    //           className="no-underline border-b border-grey-dark text-grey-dark"
-    //           href="#"
-    //         >
-    //           Terms of Service
-    //         </a>{" "}
-    //         and
-    //         <a
-    //           className="no-underline border-b border-grey-dark text-grey-dark"
-    //           href="#"
-    //         >
-    //           Privacy Policy
-    //         </a>
-    //       </div>
-    //     </div>
-
-    //     <div className="text-grey-dark mt-6">
-    //       Already have an account?
-    //       <a
-    //         className="no-underline border-b border-blue text-blue"
-    //         href="../login/"
-    //       >
-    //         Log in
-    //       </a>
-    //       .
-    //     </div>
-    //   </div>
-    // </div>
-
-    <section className="bg-gray-1 py-20 dark:bg-dark lg:py-[120px]">
+    <section className="bg-gray-1 py-10 dark:bg-dark lg:py-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
@@ -91,17 +23,33 @@ function page() {
                   name="password"
                   placeholder="Password"
                 />
+                <InputBox
+                  type="confirm-password"
+                  name="confirm-password"
+                  placeholder="Confirm Password"
+                />
                 <div className="mb-10">
                   <Button
                     variant="secondary"
                     className="w-full cursor-pointer px-5 py-3 text-base font-medium transition bg-gray-800 text-white hover:bg-gray-700"
                   >
-                    Log In
+                    Continue
                   </Button>
                 </div>
+                <div>
+                  <Button
+                  variant={"link"}
+                  >
+                  <Link href={"/log-in"}>
+                 Already have an account? Log in
+                  </Link>
+                  </Button>
+                 
+                 
+                </div>
               </form>
-              <p className="mb-6 text-base text-secondary-color dark:text-dark-7">
-                Connect With
+              <p className="mb-6 text-sm text-secondary-color dark:text-dark-7">
+                Or Connect With
               </p>
               <ul className="-mx-2 mb-12 flex justify-between">
                 <li className="w-full px-2">
@@ -162,18 +110,8 @@ function page() {
                   </a>
                 </li>
               </ul>
-              <a
-                href="/#"
-                className="mb-2 inline-block text-base text-dark hover:text-primary hover:underline dark:text-white"
-              >
-                Forget Password?
-              </a>
-              <p className="text-base text-body-color dark:text-dark-6">
-                <span className="pr-0.5">Not a member yet?</span>
-                <a href="/#" className="text-primary hover:underline">
-                  Sign Up
-                </a>a
-              </p>
+             
+             
             </div>
           </div>
         </div>

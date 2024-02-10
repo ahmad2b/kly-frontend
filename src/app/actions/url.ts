@@ -1,5 +1,7 @@
 'use server';
 
+import { fetchBackendUrl } from '@/lib/utils';
+
 export interface ShortenURL {
 	id: number;
 	url: string;
@@ -17,14 +19,6 @@ interface Response {
 	error?: string;
 }
 
-export const getBackendUrl = () => {
-	const backendUrl = process.env.NEXT_PUBLIC_API_URL;
-	if (!backendUrl) {
-		throw new Error('Backend URL is not defined');
-	}
-	return backendUrl;
-};
-
 export async function urlShortener(data: { url: string }): Promise<Response> {
 	const { url } = data;
 
@@ -32,7 +26,7 @@ export async function urlShortener(data: { url: string }): Promise<Response> {
 		throw new Error('URL is not defined');
 	}
 
-	const baseUrl = getBackendUrl();
+	const baseUrl = fetchBackendUrl();
 
 	const response = await fetch(`${baseUrl}/api/url`, {
 		method: 'POST',

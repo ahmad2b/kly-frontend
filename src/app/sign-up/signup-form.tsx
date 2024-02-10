@@ -3,6 +3,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
+import { SignupRequest, SignupValidator } from '@/lib/validators';
+
 import { Button } from '@/components/ui/button';
 import {
 	Form,
@@ -13,28 +15,45 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { toast } from '@/components/ui/use-toast';
-import { SignupRequest, SignupValidator } from '@/lib/validators';
+
+import { signup } from '@/app/actions/auth';
+import { toast } from 'sonner';
 
 export function SignupForm() {
 	const form = useForm<SignupRequest>({
 		resolver: zodResolver(SignupValidator),
 		defaultValues: {
-			email: '',
+			email_address: '',
+			username: '',
 			password: '',
-			confirmPassword: '',
+			confirmpassword: '',
 		},
 	});
 
-	function onSubmit(data: SignupRequest) {
-		toast({
-			title: 'You submitted the following values:',
-			description: (
-				<pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-					<code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-				</pre>
-			),
-		});
+	async function onSubmit(data: SignupRequest) {
+		const { confirmpassword, ...payload } = SignupValidator.parse(data);
+
+		const response = await signup(payload);
+
+		if (response.error) {
+			toast('An error occurred while signing up. Please try again later.', {
+				description: response.error,
+				action: {
+					label: 'Retry',
+					onClick: () => form.handleSubmit(onSubmit)(),
+				},
+			});
+			return;
+		}
+
+		if (response.data) {
+			toast('You have successfully signed up!', {
+				description: `Welcome, ${response.data.username}!`,
+				position: 'bottom-right',
+			});
+			form.reset();
+			return;
+		}
 	}
 
 	return (
@@ -45,7 +64,7 @@ export function SignupForm() {
 			>
 				<FormField
 					control={form.control}
-					name='email'
+					name='email_address'
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Email</FormLabel>
@@ -56,7 +75,23 @@ export function SignupForm() {
 									placeholder='Email'
 								/>
 							</FormControl>
-							{/* <FormDescription>Enter your email address</FormDescription> */}
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name='username'
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Username</FormLabel>
+							<FormControl>
+								<Input
+									{...field}
+									type='text'
+									placeholder='Username'
+								/>
+							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -74,14 +109,13 @@ export function SignupForm() {
 									placeholder='Password'
 								/>
 							</FormControl>
-							{/* <FormDescription>Enter your password</FormDescription> */}
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
 				<FormField
 					control={form.control}
-					name='confirmPassword'
+					name='confirmpassword'
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Confirm Password</FormLabel>
@@ -92,7 +126,6 @@ export function SignupForm() {
 									placeholder='Confirm Password'
 								/>
 							</FormControl>
-							{/* <FormDescription>Enter your password</FormDescription> */}
 							<FormMessage />
 						</FormItem>
 					)}
@@ -100,6 +133,8 @@ export function SignupForm() {
 				<Button
 					type='submit'
 					className='w-full'
+					isLoading={form.formState.isSubmitting}
+					disabled={form.formState.isSubmitting}
 				>
 					Sign up
 				</Button>

@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
+import { login } from '@/app/actions/auth';
 import { Button } from '@/components/ui/button';
 import {
 	Form,
@@ -13,27 +14,44 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { toast } from '@/components/ui/use-toast';
 import { LoginRequest, LoginValidator } from '@/lib/validators';
+import { toast } from 'sonner';
 
 export function LoginForm() {
 	const form = useForm<LoginRequest>({
 		resolver: zodResolver(LoginValidator),
 		defaultValues: {
-			email: '',
+			email_address: '',
+			username: '',
 			password: '',
 		},
 	});
 
-	function onSubmit(data: LoginRequest) {
-		toast({
-			title: 'You submitted the following values:',
-			description: (
-				<pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-					<code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-				</pre>
-			),
-		});
+	async function onSubmit(data: LoginRequest) {
+		const { ...payload } = LoginValidator.parse(data);
+
+		const response = await login(payload);
+
+		if (response.error) {
+			console.error('An error occurred while logging in', response.error);
+			toast('An error occurred while logging in. Please try again later.', {
+				description: response.error,
+				action: {
+					label: 'Retry',
+					onClick: () => form.handleSubmit(onSubmit)(),
+				},
+			});
+			return;
+		}
+
+		if (response.data) {
+			toast('You have successfully logged in!', {
+				description: `Welcome, !`,
+				position: 'bottom-right',
+			});
+			form.reset();
+			return;
+		}
 	}
 
 	return (
@@ -44,7 +62,7 @@ export function LoginForm() {
 			>
 				<FormField
 					control={form.control}
-					name='email'
+					name='email_address'
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Email</FormLabel>
@@ -55,7 +73,23 @@ export function LoginForm() {
 									placeholder='Email'
 								/>
 							</FormControl>
-							{/* <FormDescription>Enter your email address</FormDescription> */}
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name='username'
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Username</FormLabel>
+							<FormControl>
+								<Input
+									{...field}
+									type='text'
+									placeholder='Username'
+								/>
+							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -73,7 +107,6 @@ export function LoginForm() {
 									placeholder='Password'
 								/>
 							</FormControl>
-							{/* <FormDescription>Enter your password</FormDescription> */}
 							<FormMessage />
 						</FormItem>
 					)}
@@ -81,6 +114,8 @@ export function LoginForm() {
 				<Button
 					type='submit'
 					className='w-full'
+					isLoading={form.formState.isSubmitting}
+					disabled={form.formState.isSubmitting}
 				>
 					Login
 				</Button>

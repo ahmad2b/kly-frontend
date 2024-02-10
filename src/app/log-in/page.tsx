@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { FaFacebookF, FaGoogle, FaXTwitter } from 'react-icons/fa6';
 
+import { LoginForm } from './login-form';
+
 import { cn } from '@/lib/utils';
 
 import { Logo } from '@/components/logo';
 import { buttonVariants } from '@/components/ui/button';
-import { LoginForm } from './login-form';
 
 const socialIcons = [
 	{
